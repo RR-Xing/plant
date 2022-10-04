@@ -1,0 +1,33 @@
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+uni-text {
+    font-size: 1.34375rem;
+    font-weight: 400;
+}
+.text-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(141, 255, 115);
+    height: 7.5rem;
+    width: 70%;
+    margin: 0.625rem;
+    border-radius: 0 4.6875rem;
+    padding: 1.25rem;
+}
+.biaoTi {
+    align-self: flex-start;
+    font-weight: 600;
+    margin-bottom: auto;
+    font-size: 1.5625rem;
+}
+.jieGuo {
+    align-self: center;
+    margin-bottom: auto;
+}
