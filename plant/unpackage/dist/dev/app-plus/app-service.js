@@ -49,11 +49,12 @@ if (uni.restoreGlobal) {
         time: "\u6B63\u5728\u83B7\u53D6",
         shuiCao: "\u6B63\u5728\u83B7\u53D6",
         yanWu: "\u6B63\u5728\u83B7\u53D6",
-        fengShan: "\u6B63\u5728\u83B7\u53D6"
+        fengShan: "\u6B63\u5728\u83B7\u53D6",
+        content: ""
       };
     },
     onLoad() {
-      this.timer = setInterval(() => this.huoQu(), 30100);
+      this.timer = setInterval(() => this.huoQu(), 6e4);
     },
     onUnload() {
       clearInterval(this.timer);
@@ -68,15 +69,15 @@ if (uni.restoreGlobal) {
           method: "GET",
           dataType: "json",
           timeout: 3e4,
-          then: (res) => {
-            formatAppLog("log", "at pages/index/index.vue:54", res);
+          success: (res) => {
+            formatAppLog("log", "at pages/index/index.vue:63", res);
             let shuJu = res.data.data.docs[0];
             let shu = shuJu.message.split("#");
             this.shiDu = shu[1] + "%";
-            this.time = shuJu.created;
             this.shuiCao = shu[2];
             this.yanWu = Math.floor(shu[3] / 1023 * 100) + "%";
             this.fengShan = shu[4];
+            this.time = shuJu.created;
           },
           fail: (res) => {
             clearInterval(this.timer);
@@ -91,10 +92,32 @@ if (uni.restoreGlobal) {
               confirmText: "\u91CD\u8BD5",
               success: (res2) => {
                 if (res2.confirm) {
-                  this.timer = setInterval(() => this.huoQu(), 1500);
+                  this.timer = setInterval(() => this.huoQu(), 6e4);
                 }
               }
             });
+          }
+        });
+      },
+      faSong() {
+        uni.request({
+          url: "https://iot_s1.dfrobot.com.cn/apiv2/publish?topic=bGJkTK1nR&msg=" + this.content + "&token=711b0145cf743d16e4b30dcdaf9ab4e2&iname=wBE94qNnR&ipwd=wfE9VqHngz&timemark=1665110169024",
+          method: "GET",
+          dataType: "json",
+          complete: (res) => {
+            if (res.message = "Success") {
+              uni.showToast({
+                icon: "success",
+                title: "\u53D1\u9001\u6210\u529F\uFF01\uFF01\uFF01"
+              });
+              this.content = "";
+            } else {
+              uni.showToast({
+                icon: "fail",
+                title: "\u53D1\u9001\u5931\u8D25\uFF01\uFF01\uFF01"
+              });
+              this.content = "";
+            }
           }
         });
       }
@@ -119,12 +142,29 @@ if (uni.restoreGlobal) {
         vue.createElementVNode("text", { class: "jieGuo" }, vue.toDisplayString($data.fengShan), 1)
       ]),
       vue.createElementVNode("view", { class: "text-area" }, [
-        vue.createElementVNode("text", { class: "biaoTi" }, "\u65F6\u95F4\uFF1A"),
+        vue.createElementVNode("text", { class: "biaoTi" }, "\u53D1\u9001\u65F6\u95F4\uFF1A"),
         vue.createElementVNode("text", { class: "jieGuo" }, vue.toDisplayString($data.time), 1)
+      ]),
+      vue.createElementVNode("text", { class: "shuoMing" }, "\uFF08\u6BCF\u5206\u949F\u66F4\u65B0\u4E00\u6B21\uFF09"),
+      vue.createElementVNode("view", { class: "text-area" }, [
+        vue.createElementVNode("text", { class: "biaoTi" }, "\u9608\u503C\u7BA1\u7406"),
+        vue.createElementVNode("view", { class: "shuRu jieGuo" }, [
+          vue.withDirectives(vue.createElementVNode("input", {
+            type: "text",
+            placeholder: "\u8F93\u5165\u9608\u503C",
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.content = $event)
+          }, null, 512), [
+            [vue.vModelText, $data.content]
+          ]),
+          vue.createElementVNode("button", {
+            size: "mini",
+            onClick: _cache[1] || (_cache[1] = ($event) => $options.faSong())
+          }, "\u53D1\u9001")
+        ])
       ])
     ]);
   }
-  var PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/\uE001/\uE001/\u65B0\u5EFA\u6587\u4EF6\u5939 (4)/plant/pages/index/index.vue"]]);
+  var PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "C:/Users/gkq/Desktop/plant/pages/index/index.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   const _sfc_main = {
     onLaunch: function() {
@@ -137,7 +177,7 @@ if (uni.restoreGlobal) {
       formatAppLog("log", "at App.vue:10", "App Hide");
     }
   };
-  var App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "E:/\uE001/\uE001/\u65B0\u5EFA\u6587\u4EF6\u5939 (4)/plant/App.vue"]]);
+  var App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "C:/Users/gkq/Desktop/plant/App.vue"]]);
   function createApp() {
     const app = vue.createVueApp(App);
     return {

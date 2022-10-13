@@ -31,3 +31,15 @@ uni-text {
     align-self: center;
     margin-bottom: auto;
 }
+.shuoMing {
+    font-size: 1.09375rem;
+}
+.shuRu {
+    display: flex;
+    justify-content: center;
+}
+uni-input {
+    border-bottom: 1px blue solid;
+    height: 100%;
+    flex: 1;
+}

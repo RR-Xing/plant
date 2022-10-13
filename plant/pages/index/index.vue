@@ -21,6 +21,13 @@
       <text class='jieGuo'>{{time}}</text>
     </view>
     <text class="shuoMing">（每分钟更新一次）</text>
+    <view class="text-area">
+      <text class="biaoTi">阈值管理</text>
+      <view class="shuRu jieGuo">
+        <input type="text" placeholder="输入阈值" v-model="content">
+        <button size="mini" @click="faSong()">发送</button>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -32,7 +39,8 @@
         time: '正在获取',
         shuiCao: '正在获取',
         yanWu: '正在获取',
-        fengShan: '正在获取'
+        fengShan: '正在获取',
+        content: ''
       }
     },
     onLoad() {
@@ -74,7 +82,7 @@
               confirmText: '重试',
               success: (res) => {
                 if (res.confirm) {
-                  this.timer = setInterval(() => this.huoQu(), 1500)
+                  this.timer = setInterval(() => this.huoQu(), 60000)
                 }
               }
             })
@@ -83,6 +91,30 @@
 
 
 
+        })
+      },
+      faSong() {
+
+        uni.request({
+          url: 'https://iot_s1.dfrobot.com.cn/apiv2/publish?topic=bGJkTK1nR&msg=' + this.content +
+            '&token=711b0145cf743d16e4b30dcdaf9ab4e2&iname=wBE94qNnR&ipwd=wfE9VqHngz&timemark=1665110169024',
+          method: 'GET',
+          dataType: 'json',
+          complete: res => {
+            if (res.message = 'Success') {
+              uni.showToast({
+                icon: 'success',
+                title: '发送成功！！！'
+              })
+              this.content = ''
+            } else {
+              uni.showToast({
+                icon: 'fail',
+                title: '发送失败！！！'
+              })
+              this.content = ''
+            }
+          }
         })
       }
     }
@@ -95,7 +127,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url(~@/static/back.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
+
+  template{
+    
+}
 
   text {
     font-size: 43rpx;
@@ -129,5 +169,16 @@
 
   .shuoMing {
     font-size: 35rpx;
+  }
+
+  .shuRu {
+    display: flex;
+    justify-content: center;
+  }
+
+  input {
+    border-bottom: 1px blue solid;
+    height: 100%;
+    flex: 1;
   }
 </style>
