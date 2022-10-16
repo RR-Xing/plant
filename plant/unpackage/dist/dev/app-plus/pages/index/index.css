@@ -5,16 +5,46 @@
     align-items: center;
     justify-content: center;
 }
+body {
+    background-image: url(../../static/back.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 uni-text {
     font-size: 1.34375rem;
     font-weight: 400;
 }
-.text-area {
+.hao {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: rgb(141, 255, 115);
+    height: 7.5rem;
+    width: 70%;
+    margin: 0.625rem;
+    border-radius: 0 4.6875rem;
+    padding: 1.25rem;
+}
+.buHao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ed5a65;
+    height: 7.5rem;
+    width: 70%;
+    margin: 0.625rem;
+    border-radius: 0 4.6875rem;
+    padding: 1.25rem;
+}
+.kai {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #23a0ff;
     height: 7.5rem;
     width: 70%;
     margin: 0.625rem;
@@ -33,6 +63,7 @@ uni-text {
 }
 .shuoMing {
     font-size: 1.09375rem;
+    color: white;
 }
 .shuRu {
     display: flex;
