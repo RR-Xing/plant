@@ -1,4 +1,8 @@
 <template>
+  <view class="tiMu">
+    <text class="bigTitle">AI护</text>
+    <text class="smallTitle">—城市净氧中心</text>
+  </view>
   <view class="content">
     <view :class="shiDuOK">
       <text class='biaoTi'>土壤湿度：</text>
@@ -48,7 +52,6 @@
         sdtz: false,
         sctz: false,
         ywtz: false,
-        cid: ''
       }
     },
 
@@ -139,9 +142,6 @@
           complete: () => {
             uni.hideLoading()
           }
-
-
-
         })
       },
       faSong() {
@@ -179,6 +179,23 @@
 </script>
 
 <style>
+  .tiMu{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    color: #20a162;
+  }
+  
+  .bigTitle{
+    font-size: 120rpx;
+    font-style:italic;
+  }
+  
+  .smallTitle{
+    font-size: 100rpx;
+    align-self: flex-end;
+  }
+  
   .content {
     display: flex;
     flex-direction: column;
