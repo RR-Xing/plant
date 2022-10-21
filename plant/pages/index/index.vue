@@ -33,6 +33,13 @@
       </view>
     </view>
   </view>
+  <hr>
+  <view class="copy">
+    <text>Copyright © by RR-Xing</text>
+    <text>(https://rr-xing.rth1.one)</text>
+    <text id="xiao">开源：</text>
+    <text>https://github.com/RR-Xing/plant</text>
+  </view>
 </template>
 
 <script>
@@ -179,6 +186,10 @@
 </script>
 
 <style>
+  @font-face {
+    font-family: 'tit';
+    src: url(~@/static/1.ttf);
+  }
   .tiMu{
     display: flex;
     width: 100%;
@@ -189,11 +200,13 @@
   .bigTitle{
     font-size: 120rpx;
     font-style:italic;
+    font-family: 'tit';
   }
   
   .smallTitle{
     font-size: 100rpx;
     align-self: flex-end;
+    font-family: 'tit';
   }
   
   .content {
@@ -283,5 +296,26 @@
     border-bottom: 1px blue solid;
     height: 100%;
     flex: 1;
+  }
+  
+  .copy{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(39, 40, 51, 0.8);
+  }
+  
+  .copy text{
+    margin: 15rpx 0;
+    color: aliceblue;
+    font-weight: lighter;
+  }
+  
+  #xiao{
+    font-size: 35rpx;
+  }
+  
+  hr{
+    color: #63bbd0;
   }
 </style>
