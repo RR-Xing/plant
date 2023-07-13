@@ -31,6 +31,7 @@
         <input type="text" placeholder="输入阈值" v-model="content">
         <button size="mini" @click="faSong()" type="primary">发送</button>
       </view>
+      <input type="password" placeholder="请输入管理密码" v-model="password">
     </view>
   </view>
   <hr>
@@ -59,6 +60,7 @@
         sdtz: false,
         sctz: false,
         ywtz: false,
+        password: ''
       }
     },
 
@@ -110,7 +112,7 @@
               this.sctz = false
             }
             this.yanWu = Math.floor(shu[3] / 1023 * 100) + '%'
-            if (shu[3] > 75) {
+            if (shu[3] > 750) {
               this.yanWuOK = 'buHao'
               if (!this.ywtz) {
                 this.push('烟雾浓度过高！', '小风扇正在努力……')
@@ -152,28 +154,34 @@
         })
       },
       faSong() {
-
-        uni.request({
-          url: 'https://iot_s1.dfrobot.com.cn/apiv2/publish?topic=bGJkTK1nR&msg=' + this.content +
-            '&token=711b0145cf743d16e4b30dcdaf9ab4e2&iname=wBE94qNnR&ipwd=wfE9VqHngz&timemark=1665110169024',
-          method: 'GET',
-          dataType: 'json',
-          complete: res => {
-            if (res.message = 'Success') {
-              uni.showToast({
-                icon: 'success',
-                title: '发送成功！！！'
-              })
-              this.content = ''
-            } else {
-              uni.showToast({
-                icon: 'fail',
-                title: '发送失败！！！'
-              })
-              this.content = ''
+        if (this.password == ** ** ** ) {
+          uni.request({
+            url: 'https://iot_s1.dfrobot.com.cn/apiv2/publish?topic=bGJkTK1nR&msg=' + this.content +
+              '&token=711b0145cf743d16e4b30dcdaf9ab4e2&iname=wBE94qNnR&ipwd=wfE9VqHngz&timemark=1665110169024',
+            method: 'GET',
+            dataType: 'json',
+            complete: res => {
+              if (res.message = 'Success') {
+                uni.showToast({
+                  icon: 'success',
+                  title: '发送成功！！！'
+                })
+                this.content = ''
+              } else {
+                uni.showToast({
+                  icon: 'fail',
+                  title: '发送失败！！！'
+                })
+                this.content = ''
+              }
             }
-          }
-        })
+          })
+        } else {
+          uni.showToast({
+            icon: 'fail',
+            title: '密码错误！！！'
+          })
+        }
       },
       push(title, message) {
         uni.createPushMessage({
@@ -190,25 +198,26 @@
     font-family: 'tit';
     src: url(~@/static/1.ttf);
   }
-  .tiMu{
+
+  .tiMu {
     display: flex;
     width: 100%;
     flex-direction: column;
     color: #20a162;
   }
-  
-  .bigTitle{
+
+  .bigTitle {
     font-size: 120rpx;
-    font-style:italic;
+    font-style: italic;
     font-family: 'tit';
   }
-  
-  .smallTitle{
+
+  .smallTitle {
     font-size: 100rpx;
     align-self: flex-end;
     font-family: 'tit';
   }
-  
+
   .content {
     display: flex;
     flex-direction: column;
@@ -218,10 +227,11 @@
   }
 
   page {
-    background-image: url(~@/static/back.webp);
+    background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F67846c7d-ae5c-40ef-9ec2-3b1a34f81a2e%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1691403571&t=a74e3932fc2291139b6a767b5dedb00d');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size: cover;
   }
 
 
@@ -236,7 +246,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgb(141, 255, 115);
+    background-color: rgba(141, 255, 115, 0.7);
     height: 240rpx;
     width: 70%;
     margin: 20rpx;
@@ -249,7 +259,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #ed5a65;
+    background-color: rgba(237, 90, 101, 0.7);
     height: 240rpx;
     width: 70%;
     margin: 20rpx;
@@ -297,25 +307,25 @@
     height: 100%;
     flex: 1;
   }
-  
-  .copy{
+
+  .copy {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgba(39, 40, 51, 0.8);
   }
-  
-  .copy text{
+
+  .copy text {
     margin: 15rpx 0;
     color: aliceblue;
     font-weight: lighter;
   }
-  
-  #xiao{
+
+  #xiao {
     font-size: 35rpx;
   }
-  
-  hr{
+
+  hr {
     color: #63bbd0;
   }
 </style>
